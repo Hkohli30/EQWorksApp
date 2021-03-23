@@ -45,7 +45,7 @@ class Library(private val activity: Activity, private val url: String = "https:/
 
     fun log(event: LocationEvent) {
         // POST to API Server
-        postDataToServer(url, getResultString(event.lat, event.lon, event.time))
+        postDataToServer(url, getResultString(event.lat, event.lon, event.time, event.ext))
     }
 
     fun getLastLocation() {
@@ -152,7 +152,7 @@ class Library(private val activity: Activity, private val url: String = "https:/
                 getLastLocation()
             }
             else {
-                log(LocationEvent(0.0, 0.0, getDateTime(), ""))
+                log(LocationEvent(0.0, 0.0, getDateTime()))
             }
 
         }
@@ -161,8 +161,8 @@ class Library(private val activity: Activity, private val url: String = "https:/
     /**
      * Makes a location event posting string
      */
-    private fun getResultString(lat: Double, lon: Double, dateTime: String): String {
-        return "Latitude: $lat, Longitude : $lon, DateTime: $dateTime"
+    private fun getResultString(lat: Double, lon: Double, dateTime: String, ext: String): String {
+        return "Latitude: $lat, Longitude : $lon, DateTime: $dateTime, Ext: $ext"
     }
 
     /**
