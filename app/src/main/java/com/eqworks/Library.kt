@@ -213,6 +213,7 @@ class Library(private val activity: Activity, private val url: String = "https:/
 
     /**
      * Parses the json result to represent in the log
+     * End to end testing
      */
     private fun parseData(data: JSONObject): String {
         return JSONObject(data.getString("data")).getString("args") ?: "No json data"
