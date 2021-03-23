@@ -39,8 +39,6 @@ class Library(private val activity: Activity, private val url: String = "https:/
     var textView: TextView? = null
 
     fun setup(): Boolean {
-        if(activity == null)
-            return false
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
         return true
     }
