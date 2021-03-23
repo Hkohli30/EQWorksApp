@@ -39,7 +39,9 @@ class Library(private val activity: Activity, private val url: String = "https:/
     var textView: TextView? = null
 
     fun setup(): Boolean {
-        //fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
+        if(activity == null)
+            return false
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
         return true
     }
 
@@ -61,7 +63,7 @@ class Library(private val activity: Activity, private val url: String = "https:/
                 }
             } else {
                 Toast.makeText(activity.applicationContext, "Please Enable Location", Toast.LENGTH_SHORT).show()
-                Handler().postDelayed(Runnable {
+                Handler().postDelayed({
                     activity.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }, 1000)
             }
@@ -203,7 +205,7 @@ class Library(private val activity: Activity, private val url: String = "https:/
             {
                 dialog.dismiss()
                 textView?.text = "That didn't work"
-                Log.i(LOG_TAG, it.localizedMessage.toString())
+                Log.i(LOG_TAG, it?.localizedMessage.toString())
             }
         )
         queue.add(jsonObjectRequest)
